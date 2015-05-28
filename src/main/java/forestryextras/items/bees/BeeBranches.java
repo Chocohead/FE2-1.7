@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleSpecies;
 import forestry.api.genetics.IClassification;
-import forestry.api.genetics.IClassification.EnumClassLevel;
 
 public enum BeeBranches implements IClassification{
 	DEADLY("Deadly"),
@@ -19,7 +18,6 @@ public enum BeeBranches implements IClassification{
 	
 	private String name;
 	private String uID;
-	private String latin;
 	private ArrayList<IAlleleSpecies> species;
 	private IClassification parent;
 	private EnumClassLevel level;
@@ -27,7 +25,6 @@ public enum BeeBranches implements IClassification{
 	private BeeBranches(String name){
 		this.name = name;
 		this.uID = "classification." + name.toLowerCase();
-		this.latin = name;
 		this.level = EnumClassLevel.GENUS;
 		this.species = new ArrayList<IAlleleSpecies>();
 		this.parent = AlleleManager.alleleRegistry.getClassification("family.apidae");

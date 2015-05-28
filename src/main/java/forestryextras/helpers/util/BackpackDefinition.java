@@ -1,7 +1,7 @@
 package forestryextras.helpers.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -63,7 +63,20 @@ public class BackpackDefinition implements IBackpackDefinition{
 	}
 
 	@Override
+	public void addValidItems(List<ItemStack> validItems) {
+		for (ItemStack is : validItems) {
+			if(!cont.contains(is))
+				cont.add(is);
+		}
+	}
+
+	@Override
 	public boolean isValidItem(EntityPlayer player, ItemStack itemstack) {
+		return isValidItem(itemstack);
+	}
+
+	@Override
+	public boolean isValidItem(ItemStack itemstack) {
 		return this.cont.contains(itemstack);
 	}
 
@@ -71,4 +84,5 @@ public class BackpackDefinition implements IBackpackDefinition{
 	public String getName(ItemStack backpack) {
 		return backpack.getDisplayName();
 	}
+
 }

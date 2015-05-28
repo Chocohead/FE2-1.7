@@ -148,14 +148,14 @@ public class BeeMutation implements IBeeMutation{
 		
 		if (this.requiresBlock){
 			if (this.requiredBlockName != null){
-			
+				conditions.add(String.format("Requires Block ", requiredBlockName));
 			}else if (this.requiredBlockOreDictEntry != null){
 				ArrayList<ItemStack> ores = OreDictionary.getOres(this.requiredBlockOreDictEntry);
 				if (ores.size() > 0){
 					conditions.add(String.format("Requires Block ", ores.get(0).getDisplayName()));
 				}
-			}else{
-
+			}else if (this.requiredBlock != null) {
+				conditions.add(String.format("Requires Block ", requiredBlock.getLocalizedName()));
 			}
 		}
 		return conditions;

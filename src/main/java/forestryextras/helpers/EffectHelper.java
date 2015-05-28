@@ -15,6 +15,7 @@ public class EffectHelper {
 		
 		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range);
 		
+		@SuppressWarnings("unchecked")
 		List<Entity> entities = world.selectEntitiesWithinAABB(EntityPlayer.class, bb, EffectHelper.getSelector());
 		
 		for(Entity e : entities)

@@ -2,7 +2,6 @@ package forestryextras.items.bees.effects;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vazkii.botania.api.mana.IManaReceiver;

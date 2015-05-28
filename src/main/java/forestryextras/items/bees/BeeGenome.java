@@ -2,7 +2,6 @@ package forestryextras.items.bees;
 
 import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.genetics.IAllele;
-import forestryextras.main.init.FEBees;
 
 public class BeeGenome {
 	public static IAllele[] getTemplateModBase(){

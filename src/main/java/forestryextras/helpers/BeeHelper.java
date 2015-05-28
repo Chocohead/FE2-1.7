@@ -3,7 +3,6 @@ package forestryextras.helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import forestry.apiculture.items.ItemArmorApiarist;
 import forestry.core.config.ForestryItem;
 import forestry.plugins.PluginApiculture;
 

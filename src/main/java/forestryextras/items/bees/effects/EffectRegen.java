@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
