@@ -1,10 +1,14 @@
 package forestryextras.items.bees.flowers;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import forestry.api.apiculture.FlowerManager;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleFlowers;
+import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IFlowerProvider;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
@@ -79,8 +83,14 @@ public class FlowerProvider implements IFlowerProvider, IAlleleFlowers{
 		return products;
 	}
 
+//	@Override
+//	public ItemStack[] getItemStacks() {
+//		return null;
+//	}
+
 	@Override
-	public ItemStack[] getItemStacks() {
-		return null;
+	public List<IFlower> getFlowers() {
+		// TODO Is this right???
+		return FlowerManager.flowerRegistry.getAcceptableFlowers(this.name);				
 	}
 }
