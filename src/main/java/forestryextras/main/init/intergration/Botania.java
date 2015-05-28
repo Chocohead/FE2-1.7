@@ -2,6 +2,7 @@ package forestryextras.main.init.intergration;
 
 import vazkii.botania.common.lib.LibOreDict;
 import forestry.api.apiculture.FlowerManager;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -14,9 +15,11 @@ public class Botania {
 	public static final String[] PETAL = LibOreDict.PETAL;
 	
 	public static void initMisc(){
-		for(int i = 0; i < FLOWER.length; i++){
+		for(int i = 0; i < FLOWER.length; i++) {
 			ItemStack stack = OreDictionary.getOres(FLOWER[i]).get(0);
-			FlowerManager.plainFlowers.add(stack);}
+			// FlowerManager.plainFlowers.add(stack);
+			FlowerManager.flowerRegistry.registerPlantableFlower(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage(), 1.0, FlowerManager.FlowerTypeVanilla);
+		}
 	}
 	
 	public static void initItems(){
