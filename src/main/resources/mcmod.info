@@ -11,6 +11,7 @@
   "credits": "Creator: Wasliebob",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "requiredMods": ["Forge","Forestry","WaslieCore"],
+  "dependencies": ["Thaumcraft","Botania","ExtraTiC","EnderIO","oodmod","BigReactors","ModularMachines"]
 }
 ]
