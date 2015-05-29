@@ -214,12 +214,12 @@ public final class FEItemFrame extends Item implements IHiveFrame {
 			list.add(EnumChatFormatting.RED + "isSimulated: " + EnumChatFormatting.GRAY + simulated);
 			list.add(EnumChatFormatting.RED + "isSelflighted: " + EnumChatFormatting.GRAY +  selflighted);
 			list.add(EnumChatFormatting.RED + "isSealed: " + EnumChatFormatting.GRAY + sealed);
-			list.add(EnumChatFormatting.RED + "Decay: " + EnumChatFormatting.GRAY +  decay * 100 + "%");
-			list.add(EnumChatFormatting.RED + "Flowering: " + EnumChatFormatting.GRAY + flowering * 100 + "%");
-			list.add(EnumChatFormatting.RED + "Production Modifier: " + EnumChatFormatting.GRAY +  productionmodifier * 100 + "%");
-			list.add(EnumChatFormatting.RED + "Lifespan Modifier: " + EnumChatFormatting.GRAY +  lifespanmodifier * 100 + "%");
-			list.add(EnumChatFormatting.RED + "Mutation Modifier: " + EnumChatFormatting.GRAY + mutationmodifier * 100 + "%");
-			list.add(EnumChatFormatting.RED + "Territory Modifier: " + EnumChatFormatting.GRAY + territorymodifier * 100 + "%");
+			list.add(EnumChatFormatting.RED + "Decay: " + EnumChatFormatting.GRAY +  String.format("%.0f", decay * 100) + "%");
+			list.add(EnumChatFormatting.RED + "Flowering: " + EnumChatFormatting.GRAY + String.format("%.0f", flowering * 100) + "%");
+			list.add(EnumChatFormatting.RED + "Production Modifier: " + EnumChatFormatting.GRAY +  String.format("%.0f", productionmodifier * 100) + "%");
+			list.add(EnumChatFormatting.RED + "Lifespan Modifier: " + EnumChatFormatting.GRAY +  String.format("%.0f", lifespanmodifier * 100) + "%");
+			list.add(EnumChatFormatting.RED + "Mutation Modifier: " + EnumChatFormatting.GRAY + String.format("%.0f", mutationmodifier * 100) + "%");
+			list.add(EnumChatFormatting.RED + "Territory Modifier: " + EnumChatFormatting.GRAY + String.format("%.0f", territorymodifier * 100) + "%");
 		}else{
 			list.add(EnumChatFormatting.GREEN + "Press " + "Shift " + "for more info!");
 		}
