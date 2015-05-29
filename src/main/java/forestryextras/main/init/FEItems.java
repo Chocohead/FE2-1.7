@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
+import forestryextras.main.Config;
 import forestryextras.helpers.DonatorHelper;
 import forestryextras.items.FEItemDonatorIngot;
 import forestryextras.items.FEItemFrame;
@@ -137,57 +138,58 @@ public class FEItems {
 	public static FEItemScoop draconicScoop;
 
 	public static void initGrafters(){
-		reinforcedGrafter = new FEItemGrafter("grafterReinforced", 0x996633, 0x999999, "grafterReinforced", 300, 1.5F, new ItemStack(FEItems.reinforcedIngot), new ItemStack(FEItems.reinforcedStick), true, null, 0);
-		draconicGrafter = new FEItemGrafter("grafterDraconic", 0x996633, 0xFF0000, "grafterDraconic", 700, 2.0F, new ItemStack(FEItems.draconicIngot), new ItemStack(FEItems.draconicStick), true, null, 0);
+		reinforcedGrafter = new FEItemGrafter("grafterReinforced", 0x996633, 0x999999, "grafterReinforced", 300, Config.reinforcedGrafterSaplingModifier, new ItemStack(FEItems.reinforcedIngot), new ItemStack(FEItems.reinforcedStick), true, null, 0);
+		draconicGrafter = new FEItemGrafter("grafterDraconic", 0x996633, 0xFF0000, "grafterDraconic", 700, Config.draconicGrafterSaplingModifier, new ItemStack(FEItems.draconicIngot), new ItemStack(FEItems.draconicStick), true, null, 0);
 	}
 	public static FEItemGrafter draconicGrafter;
 	public static FEItemGrafter reinforcedGrafter;
 
 	public static void initModSupportFrames(){
+		boolean easy = Config.modSupportFramesEasy;
 		if(OreDictionary.getOres("ingotAlumite").size() > 0)
-			alumiteFrame = new FEItemFrame(500, false, false, false, false, 1.0F, 1.0F, 1.5F, 1.0F, 1.0F, 1.0F, "frameAlumite", "frameAlumite", "frame", 0xFF33FF, new ItemStack(Items.string), new ItemStack(FEItems.alumiteStick), true, null, 0);
+			alumiteFrame = new FEItemFrame(500, false, false, false, false, 1.0F, 1.0F, 1.5F, 1.0F, 1.0F, 1.0F, "frameAlumite", "frameAlumite", "frame", 0xFF33FF, new ItemStack(Items.string), new ItemStack(FEItems.alumiteStick), easy, new FluidStack(FluidRegistry.LAVA, 20), 30);
 
 		if(OreDictionary.getOres("ingotArdite").size() > 0)
-			arditeFrame = new FEItemFrame(750, false, false, false, false, 1.0F, 1.0F, 1.6F, 1.0F, 1.0F, 1.0F, "frameArdite", "frameArdite", "frame", 0xCC6633, new ItemStack(Items.string), new ItemStack(FEItems.arditeStick), true, null, 0);
+			arditeFrame = new FEItemFrame(750, false, false, false, false, 1.0F, 1.0F, 1.6F, 1.0F, 1.0F, 1.0F, "frameArdite", "frameArdite", "frame", 0xCC6633, new ItemStack(Items.string), new ItemStack(FEItems.arditeStick), easy, new FluidStack(FluidRegistry.LAVA, 25), 40);
 
 		if(OreDictionary.getOres("ingotBronze").size() > 0)
-			bronzeFrame = new FEItemFrame(450, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameBronze", "frameBronze", "frame", 0x996633, new ItemStack(Items.string), new ItemStack(FEItems.bronzeStick), true, null, 0);
+			bronzeFrame = new FEItemFrame(450, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameBronze", "frameBronze", "frame", 0x996633, new ItemStack(Items.string), new ItemStack(FEItems.bronzeStick), easy, new FluidStack(FluidRegistry.LAVA, 15), 20);
 
 		if(OreDictionary.getOres("ingotCobalt").size() > 0)
-			cobaltFrame = new FEItemFrame(750, false, false, false, false, 1.0F, 1.0F, 1.7F, 1.0F, 1.0F, 1.0F, "frameCobalt", "frameCobalt", "frame", 0x0099CC, new ItemStack(Items.string), new ItemStack(FEItems.cobaltStick), true, null, 0);
+			cobaltFrame = new FEItemFrame(750, false, false, false, false, 1.0F, 1.0F, 1.7F, 1.0F, 1.0F, 1.0F, "frameCobalt", "frameCobalt", "frame", 0x0099CC, new ItemStack(Items.string), new ItemStack(FEItems.cobaltStick), easy, new FluidStack(FluidRegistry.LAVA, 40), 60);
 
 		if(OreDictionary.getOres("ingotCopper").size() > 0)
-			copperFrame = new FEItemFrame(225, false, false, false, false, 1.0F, 1.0F, 1.1F, 1.0F, 1.0F, 1.0F, "frameCopper", "frameCopper", "frame", 0xFFCC33, new ItemStack(Items.string), new ItemStack(FEItems.copperStick), true, null, 0);
+			copperFrame = new FEItemFrame(225, false, false, false, false, 1.0F, 1.0F, 1.1F, 1.0F, 1.0F, 1.0F, "frameCopper", "frameCopper", "frame", 0xFFCC33, new ItemStack(Items.string), new ItemStack(FEItems.copperStick), easy, new FluidStack(FluidRegistry.LAVA, 10), 12);
 
 		if(OreDictionary.getOres("ingotLead").size() > 0)
-			leadFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameLead", "frameLead", "frame", 0x9999CC, new ItemStack(Items.string), new ItemStack(FEItems.leadStick), true, null, 0);
+			leadFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameLead", "frameLead", "frame", 0x9999CC, new ItemStack(Items.string), new ItemStack(FEItems.leadStick), easy, new FluidStack(FluidRegistry.LAVA, 20), 30);
 		
 		if(OreDictionary.getOres("ingotManyullyn").size() > 0)
-			manyullynFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 2.0F, 1.0F, 1.0F, 1.0F, "frameManyullyn", "frameManyullyn", "frame", 0x9966FF, new ItemStack(Items.string), new ItemStack(FEItems.manyullynStick), true, null, 0);
+			manyullynFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 2.0F, 1.0F, 1.0F, 1.0F, "frameManyullyn", "frameManyullyn", "frame", 0x9966FF, new ItemStack(Items.string), new ItemStack(FEItems.manyullynStick), easy, new FluidStack(FluidRegistry.LAVA, 50), 80);
 
 		if(OreDictionary.getOres("ingotSilver").size() > 0)
-			silverFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameSilver", "frameSilver", "frame", 0xFFFFCC, new ItemStack(Items.string), new ItemStack(FEItems.silverStick), true, null, 0);
+			silverFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameSilver", "frameSilver", "frame", 0xFFFFCC, new ItemStack(Items.string), new ItemStack(FEItems.silverStick), easy, new FluidStack(FluidRegistry.LAVA, 20), 30);
 
 		if(OreDictionary.getOres("ingotSteel").size() > 0)
-			steelFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameSteel", "frameSteel", "frame", 0x999966, new ItemStack(Items.string), new ItemStack(FEItems.steelStick), true, null, 0);
+			steelFrame = new FEItemFrame(400, false, false, false, false, 1.0F, 1.0F, 1.2F, 1.0F, 1.0F, 1.0F, "frameSteel", "frameSteel", "frame", 0x999966, new ItemStack(Items.string), new ItemStack(FEItems.steelStick), easy, new FluidStack(FluidRegistry.LAVA, 30), 40);
 		
 		if(OreDictionary.getOres("ingotTin").size() > 0)
-			tinFrame = new FEItemFrame(200, false, false, false, false, 1.0F, 1.0F, 1.1F, 1.0F, 1.0F, 1.0F, "frameTin", "frameTin", "frame", 0xFFFFCC, new ItemStack(Items.string), new ItemStack(FEItems.tinStick), true, null, 0);
+			tinFrame = new FEItemFrame(200, false, false, false, false, 1.0F, 1.0F, 1.1F, 1.0F, 1.0F, 1.0F, "frameTin", "frameTin", "frame", 0xFFFFCC, new ItemStack(Items.string), new ItemStack(FEItems.tinStick), easy, new FluidStack(FluidRegistry.LAVA, 10), 10);
 		
 		if(OreDictionary.getOres("ingotPokefennium").size() > 0)
-			pokefenniumFrame = new FEItemFrame(800, false, false, false, false, 1.0F, 1.0F, 1.8F, 1.0F, 1.0F, 1.0F, "framePokefennium", "framePokefennium", "frame", 0x99CC99, new ItemStack(Items.string), new ItemStack(FEItems.pokefenniumStick), true, null, 0);
+			pokefenniumFrame = new FEItemFrame(800, false, false, false, false, 1.0F, 1.0F, 1.8F, 1.0F, 1.0F, 1.0F, "framePokefennium", "framePokefennium", "frame", 0x99CC99, new ItemStack(Items.string), new ItemStack(FEItems.pokefenniumStick), easy, new FluidStack(FluidRegistry.LAVA, 30), 40);
 		
 		if(OreDictionary.getOres("ingotFairy").size() > 0)
-			fairyFrame = new FEItemFrame(800, false, false, false, false, 1.0F, 1.0F, 1.7F, 1.0F, 1.0F, 1.0F, "frameFairy", "frameFairy", "frame", 0xFF99FF, new ItemStack(Items.string), new ItemStack(FEItems.fairyStick), true, null, 0);
+			fairyFrame = new FEItemFrame(800, false, false, false, false, 1.0F, 1.0F, 1.7F, 1.0F, 1.0F, 1.0F, "frameFairy", "frameFairy", "frame", 0xFF99FF, new ItemStack(Items.string), new ItemStack(FEItems.fairyStick), easy, new FluidStack(FluidRegistry.LAVA, 30), 40);
 		
 		if(OreDictionary.getOres("ingotThaumium").size() > 0)
-			thaumiumFrame = new FEItemFrame(600, false, false, false, false, 1.0F, 1.0F, 1.4F, 1.0F, 1.0F, 1.0F, "frameThaumium", "frameThaumium", "frame", 0x9966FF, new ItemStack(Items.string), new ItemStack(FEItems.thaumiumStick), true, null, 0);
+			thaumiumFrame = new FEItemFrame(600, false, false, false, false, 1.0F, 1.0F, 1.4F, 1.0F, 1.0F, 1.0F, "frameThaumium", "frameThaumium", "frame", 0x9966FF, new ItemStack(Items.string), new ItemStack(FEItems.thaumiumStick), easy, new FluidStack(FluidRegistry.LAVA, 20), 30);
 
 		if(OreDictionary.getOres("ingotDarkThaumium").size() > 0)
-			darkThaumiumFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 1.9F, 1.0F, 1.0F, 1.0F, "frameDarkThaumium", "frameDarkThaumium", "frame", 0x993399, new ItemStack(Items.string), new ItemStack(FEItems.darkThaumiumStick), true, null, 0);
+			darkThaumiumFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 1.9F, 1.0F, 1.0F, 1.0F, "frameDarkThaumium", "frameDarkThaumium", "frame", 0x993399, new ItemStack(Items.string), new ItemStack(FEItems.darkThaumiumStick), easy, new FluidStack(FluidRegistry.LAVA, 30), 40);
 		
 		if(OreDictionary.getOres("ingotVoid").size() > 0)
-			voidFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 1.9F, 1.0F, 1.0F, 1.0F, "frameVoid", "frameVoid", "frame", 0x9900CC, new ItemStack(Items.string), new ItemStack(FEItems.voidStick), true, null, 0);
+			voidFrame = new FEItemFrame(1000, false, false, false, false, 1.0F, 1.0F, 1.9F, 1.0F, 1.0F, 1.0F, "frameVoid", "frameVoid", "frame", 0x9900CC, new ItemStack(Items.string), new ItemStack(FEItems.voidStick), easy, new FluidStack(FluidRegistry.LAVA, 40), 50);
 	}
 	public static FEItemFrame alumiteFrame;
 	public static FEItemFrame arditeFrame;

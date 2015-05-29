@@ -1,6 +1,7 @@
 package forestryextras.main;
 
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -18,21 +19,22 @@ import forestryextras.main.init.FEItems;
 import forestryextras.main.init.Recipes;
 import forestryextras.main.init.intergration.IntergrationLoader;
 
-@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "3.1" ,dependencies = "required-after:Forestry;required-after:WaslieCore;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
+@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "3.2", guiFactory = "forestryextras.main.ConfigGuiFactory", dependencies = "required-after:Forestry;required-after:WaslieCore;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
 public class Main {
     @SidedProxy(clientSide = "forestryextras.client.ClientProxy", serverSide = "forestryextras.main.CommonProxy")
     public static CommonProxy proxy;
  
     @Instance("ForestryExtras")
     public static Main instance;
-    public static double version = 3.1;
+    public static double version = 3.2;
     public static String modName = "ForestryExtras";
     public static String alias = "FE";
     public static IntergrationLoader integration = new IntergrationLoader();
    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception{
-		Config.loadConfig(event);
+		Config.loadConfig(event.getSuggestedConfigurationFile());
+		FMLCommonHandler.instance().bus().register(new Config());
 		
 		proxy.load();
 		integration.prePreInit();
