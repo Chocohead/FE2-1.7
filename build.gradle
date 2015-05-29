@@ -15,57 +15,88 @@ buildscript {
     }
 }
 
-task deps{
-	project.mkdir("deps")
-	def wsc = new File('deps/WaslieCore.jar')
-	new URL('https://dl.dropboxusercontent.com/u/46500170/Forestry%20Extras%202/deps/WaslieCore.jar').withInputStream{ i -> wsc.withOutputStream{ it << i }}
-	
-	def forestry = new File('deps/Forestry.jar')
-	new URL('https://dl.dropboxusercontent.com/u/46500170/Forestry%20Extras%202/deps/Forestry.jar').withInputStream{ i -> forestry.withOutputStream{ it << i }}
+apply plugin: 'forge'
 
-	def botania = new File('deps/Botania.jar')
-	new URL('https://dl.dropboxusercontent.com/u/46500170/Forestry%20Extras%202/deps/Botania.jar').withInputStream{ i -> botania.withOutputStream{ it << i }}
-	
-	def mm = new File('deps/ModularMachines.jar')
-	new URL('https://dl.dropboxusercontent.com/u/46500170/Forestry%20Extras%202/deps/ModularMachines.jar').withInputStream{ i -> mm.withOutputStream{ it << i }}
+ext {
+	//Import config file thanks to pahimar :D
+	ext.configFile = file "buildconfig.properties"
+
 }
 
-apply plugin: 'forge'
+configFile.withReader {
+    // read config. it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
 
 ext.buildnumber = 0
 if(System.getenv('BUILD_NUMBER') != null)
     project.buildnumber = System.getenv('BUILD_NUMBER')
 
-version = "2-3.1_B${buildnumber}"
-group= "ForestryExtras" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "ForestryExtras"
-
 minecraft {
-    version = "1.7.10-10.13.0.1208"
-    assetDir = "eclipse/assets"
+    version = config.minecraft_version + "-" + config.forge_version
+    runDir = "eclipse"
 }
-dependencies{
-	compile files(
-	'deps/Forestry.jar',
-	'deps/WaslieCore.jar',
-	'deps/Botania.jar',
-	'deps/ModularMachines.jar'
-	)
-}
-	
+
+version = config.mod_version+"_B"+config.buildNumber
+group= "ForestryExtras" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "ForestryExtras2_"+minecraft.version
+
 processResources
 {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
-build.dependsOn deps
+
+jar {
+	exclude '**/*.bak'
+	includeEmptyDirs = false
+}
+
+task srcJar(type: Jar) {
+	from(sourceSets.main.allSource) {
+		include '**'
+		exclude '**/*.bak'
+	}
+
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	classifier = 'src'
+}
+
+task devJar(type: Jar) {
+	from(sourceSets.main.output) {
+		include '**'
+		exclude '**/*.bak'
+	}
+
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	classifier = 'dev'
+}
+
+task buildnumberplusone {
+  Properties props = new Properties()
+  File propsFile = new File("buildconfig.properties")
+  props.load(propsFile.newDataInputStream())
+  Integer nextbuildnum = ( ((props.getProperty("buildNumber")) as BigDecimal) + 1 )
+  props.setProperty("buildNumber", nextbuildnum.toString())
+  props.store(propsFile.newWriter(), null)
+  props.load(propsFile.newDataInputStream())
+}
+
+artifacts {
+    //archives srcJar
+    archives devJar
+}
