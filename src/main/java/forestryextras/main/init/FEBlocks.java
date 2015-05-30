@@ -10,6 +10,7 @@ import forestry.api.recipes.RecipeManagers;
 import forestryextras.blocks.FEBlock;
 import forestryextras.blocks.FEBlockCropChecker;
 import forestryextras.blocks.FEBlockProducer;
+import forestryextras.main.Config;
 
 public class FEBlocks {
 
@@ -18,8 +19,14 @@ public class FEBlocks {
 		reinforcedBlock = new FEBlock(Material.iron, "reinforcedBlock", "reinforced", true, 0F, new ItemStack(FEItems.reinforcedIngot));
 		mutatedIronBlock = new FEBlock(Material.iron, "mutatedIronBlock", "mutatedIron", true, 0F, new ItemStack(FEItems.mutatedIronIngot));
 		legendaryBlock = new FEBlock(Material.iron, "legendaryBlock", "legendary", true, 0F, new ItemStack(FEItems.legendaryIngot));
-		checkerCrop = new FEBlockCropChecker("Crop Checker");
-		producer = new FEBlockProducer("Beeducer");	
+		
+		if (Config.enableCropChecker) {
+			checkerCrop = new FEBlockCropChecker("Crop Checker");
+		}
+		if (Config.enableBeeducer) {
+			producer = new FEBlockProducer("Beeducer");
+		}
+		
 		smelting();
 	}
 	public static FEBlock draconicBlock;

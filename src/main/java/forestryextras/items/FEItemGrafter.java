@@ -1,11 +1,14 @@
 package forestryextras.items;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -32,6 +35,7 @@ public class FEItemGrafter extends Item implements IToolGrafter{
 		easy = isEasy;
 		recFluid = recipeFluid;
 		createTime = creationTime;
+		efficiencyOnProperMaterial = 4.0F;
 		
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 		OreDictionary.registerOre(oreDict, this);
@@ -50,6 +54,7 @@ public class FEItemGrafter extends Item implements IToolGrafter{
 	int createTime;
 	IIcon primary;
 	IIcon secondary;
+	private final float efficiencyOnProperMaterial;
 	
     public void recipe(boolean easy){
     	if(easy == true){
@@ -70,6 +75,31 @@ public class FEItemGrafter extends Item implements IToolGrafter{
     }
     
     @Override
+	public float func_150893_a(ItemStack p_150893_1_, Block p_150893_2_) {
+		return 1.0F;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_,
+			Block p_150894_3_, int p_150894_4_, int p_150894_5_,
+			int p_150894_6_, EntityLivingBase p_150894_7_) {
+		return true;
+	}
+
+	@Override
+	public boolean isFull3D() {
+		return true;
+	}
+
+	@Override
+	public float getDigSpeed(ItemStack itemstack, Block block, int metadata) {
+		if (ForgeHooks.isToolEffective(itemstack, block, metadata)) {
+			return efficiencyOnProperMaterial;
+			}
+		 return func_150893_a(itemstack, block);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamageForRenderPass(int meta, int renderPass) {
 		if(renderPass > 0){
