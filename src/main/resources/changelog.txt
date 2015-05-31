@@ -1,4 +1,28 @@
 ===============
+Version 3.3
+===============
+Fixed Beeducer saving turns and time in nbt.
+Beeducer time and turns configurable.
+
+===============
+Version 3.2
+===============
+Removed unused donator metals.
+Added ingots for the used donator metals.
+Made the use of donator metals configurable. 
+Made Beeducer optional.
+Made Crop Checker Optional.
+Made the Grafters work the same way as Forestrys Grafters. Also fixed the coloring.
+Made Sapling Modifier configurable for the grafters. Increased default value from 1.5/2.0 to 75/90.
+Made it configurable if the mod support frames should be crafted with an easy recipe or be crafted in a carpenter with lava. Default is still easy.
+Mod configuration can now be done in game, but a restart is still needed for it to take effect.
+Cleaned up the tooltips for the frames. No more infinite decimals.
+Temporary disabled Modular Machines integration.
+Updated to Forestry API 3.5.6.15.
+Updated deprected forestry function for registering flowers.
+Removed Thaumcraft API from source.
+
+===============
 Version 3.1
 ===============
 Added Modular Machines Upgrade, Interacting Upgrade: Mutation (has a guide entry).

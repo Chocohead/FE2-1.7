@@ -119,7 +119,7 @@ fe.bees.species.botanist=Botanisch
 --Text--
 fe.info.beeducer.1=Dieser Block wird es einfacher machen, Waben zu produzieren.
 fe.info.beeducer.2=Du musst eine Biene hinein platzieren (klicke auf den Block mit einer Biene in der Hand).
-fe.info.beeducer.3=Wenn getan, wird die Biene 32 Waben produzieren und dann sterben.
+fe.info.beeducer.3=Wenn getan, wird die Biene %d Waben produzieren und dann sterben.
 fe.info.beeducer.4=WARNUNG: Stelle sicher, nur eine Biene zur Zeit zu platzieren!
 --Misc--
 itemGroup.tabForestryExtras=Forestry Extras 2

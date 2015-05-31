@@ -119,7 +119,7 @@ fe.bees.species.botanist=植物学家
 --Text--
 fe.info.beeducer.1=本设备用于快速生产蜂巢.
 fe.info.beeducer.2=你需要放入一只蜜蜂(手持蜜蜂点击该设备).
-fe.info.beeducer.3=完成操作后蜜蜂将产出32个蜂巢然后死亡.
+fe.info.beeducer.3=完成操作后蜜蜂将产出%d个蜂巢然后死亡.
 fe.info.beeducer.4=警告:注意一次只能放置一只蜜蜂!
 --Misc--
 itemGroup.tabForestryExtras=林业扩展2

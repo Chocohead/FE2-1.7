@@ -13,13 +13,16 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import forestryextras.helpers.LocalizationHelper;
+import forestryextras.main.Config;
 
 public class FEItemBlockProducer extends ItemBlock{
 
 	public FEItemBlockProducer(Block block) {
 		super(block);
-		text = new String[]{LocalizationHelper.getLocalization("fe.info.beeducer", 1), LocalizationHelper.getLocalization("fe.info.beeducer", 2), LocalizationHelper.getLocalization("fe.info.beeducer", 3),
-				LocalizationHelper.getLocalization("fe.info.beeducer", 4)};
+		text = new String[] { String.format(LocalizationHelper.getLocalization("fe.info.beeducer", 1), Config.beeducerTurns),
+							  String.format(LocalizationHelper.getLocalization("fe.info.beeducer", 2), Config.beeducerTurns),
+							  String.format(LocalizationHelper.getLocalization("fe.info.beeducer", 3), Config.beeducerTurns),
+							  String.format(LocalizationHelper.getLocalization("fe.info.beeducer", 4), Config.beeducerTurns) };
 	}
 	String[] text;
 		

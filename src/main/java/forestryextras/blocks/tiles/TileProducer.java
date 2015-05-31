@@ -14,65 +14,68 @@ import wasliecore.helpers.MathHelper;
 import wasliecore.helpers.Utils;
 import forestry.core.config.ForestryItem;
 import forestryextras.helpers.BeeHelper;
+import forestryextras.main.Config;
 
-public class TileProducer extends TileEntity implements ISidedInventory{
-	public TileProducer(){
+public class TileProducer extends TileEntity implements ISidedInventory {
+
+	public TileProducer() {
 		stacks = new ItemStack[1];
-		time = MathHelper.secondToTick(5);
-		turns = 32;
+		time = MathHelper.secondToTick(Config.beeducerTime);
+		turns = Config.beeducerTurns;
 	}
+
 	public ItemStack[] stacks;
 	public int time;
 
 	public int turns;
 
-    @Override
-    public void updateEntity() {
-    	if(!worldObj.isRemote){
-    		if(turns == 0){
-    			stacks[0] = null;
-    			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    		}else{
-    			if(time != 0)
-    				time--;
-    		
-    			if(time == 0){
-    				ItemStack stack = getStackInSlot(0);
-    				if(stack != null && BeeHelper.getComb(stack) != null){
-//    					ItemStack comb = BeeHelper.getComb(stack);
-    					ItemStack comb = new ItemStack(ForestryItem.beeComb.item());
-    					Utils.dropBlock(worldObj, xCoord, yCoord, zCoord, comb);
-
-    					this.turns--;
-    					this.time = MathHelper.secondToTick(5);
-    				}
-    			}
-    		}
-    	}
-    }
-    
-
 	@Override
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
-		
-		NBTTagList itemList = new NBTTagList();
-        for (int i = 0; i < stacks.length; i++) {
-        	ItemStack stack = stacks[i];
-        	if (stack != null) {
-        		NBTTagCompound tag = new NBTTagCompound();
-        		tag.setByte("Slot", (byte) i);
-        		stack.writeToNBT(tag);
-        		itemList.appendTag(tag);
-        	}
-        }
-        nbt.setTag("Inventory", itemList);
+	public void updateEntity() {
+		if (!worldObj.isRemote && stacks[0] != null) {
+			if (turns <= 0) {
+				stacks[0] = null;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			} else {
+				if (time > 0) {
+					time--;
+				} else {
+					ItemStack stack = getStackInSlot(0);
+					if (stack != null && BeeHelper.getComb(stack) != null) {
+						// ItemStack comb = BeeHelper.getComb(stack);
+						ItemStack comb = new ItemStack(ForestryItem.beeComb.item());
+						Utils.dropBlock(worldObj, xCoord, yCoord, zCoord, comb);
+
+						this.turns--;
+						this.time = MathHelper.secondToTick(Config.beeducerTime);
+					}
+				}
+			}
+		}
 	}
-		
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+
+		NBTTagList itemList = new NBTTagList();
+		for (int i = 0; i < stacks.length; i++) {
+			ItemStack stack = stacks[i];
+			if (stack != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setByte("Slot", (byte) i);
+				stack.writeToNBT(tag);
+				itemList.appendTag(tag);
+			}
+		}
+		nbt.setTag("Inventory", itemList);
+		nbt.setInteger("Turns", turns);
+		nbt.setInteger("Time", time);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		
+
 		NBTTagList tagList = nbt.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < tagList.tagCount(); i++) {
 			NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
@@ -81,16 +84,18 @@ public class TileProducer extends TileEntity implements ISidedInventory{
 				stacks[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
 		}
+		turns = nbt.getInteger("Turns");
+		time = nbt.getInteger("Time");
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket() {
-	    NBTTagCompound tagCompound = new NBTTagCompound();
-	    writeToNBT(tagCompound);
-	    
-	    return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, tagCompound);
+		NBTTagCompound tagCompound = new NBTTagCompound();
+		writeToNBT(tagCompound);
+
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, tagCompound);
 	}
-	
+
 	@Override
 	public void onDataPacket(NetworkManager networkManager, S35PacketUpdateTileEntity packet) {
 		this.readFromNBT(packet.func_148857_g());
@@ -103,49 +108,55 @@ public class TileProducer extends TileEntity implements ISidedInventory{
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		return stacks[i];
+		if (i >= 0 && i < getSizeInventory()) {
+			return stacks[i];
+		}
+		return null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
-		if (stacks[i] != null){
-
-            if (stacks[i].stackSize <= j){
-                ItemStack itemstack = stacks[i];
-                stacks[i] = null;
-                return itemstack;
-            }else{
-            	ItemStack itemstack1 = stacks[i].splitStack(j);
-
-                if (stacks[i].stackSize == 0){
-                    stacks[i] = null;
-                }
-
-                return itemstack1;
-            }
-        }else{
-            return null;
-        }
+		if (i >= 0 && i < getSizeInventory()) {
+			if (stacks[i] != null) {
+				if (stacks[i].stackSize <= j) {
+					ItemStack itemstack = stacks[i];
+					stacks[i] = null;
+					return itemstack;
+				} else {
+					ItemStack itemstack1 = stacks[i].splitStack(j);
+					if (stacks[i].stackSize == 0) {
+						stacks[i] = null;
+					}
+					return itemstack1;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
-	      if (stacks[i] != null){
-	    	  ItemStack itemstack = stacks[i];
-	    	  stacks[i] = null;
-	    	  return itemstack;
-	      }else{
-	    	  return null;
-	      }
+		if (i >= 0 && i < getSizeInventory()) {
+			if (stacks[i] != null) {
+				ItemStack itemstack = stacks[i];
+				stacks[i] = null;
+				return itemstack;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		 stacks[i] = itemstack;
+		if (i >= 0 && i < getSizeInventory()) {
+			stacks[i] = itemstack;
 
-	        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()){
-	            itemstack.stackSize = getInventoryStackLimit();
-	        } 
+			if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+				itemstack.stackSize = getInventoryStackLimit();
+			}
+			turns = Config.beeducerTurns;
+			time = MathHelper.secondToTick(Config.beeducerTime);
+		}
 	}
 
 	@Override
@@ -155,10 +166,10 @@ public class TileProducer extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		  if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this){
-			  return false;
-		  }
-		  return player.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this) {
+			return false;
+		}
+		return player.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
 	}
 
 	@Override
@@ -193,10 +204,10 @@ public class TileProducer extends TileEntity implements ISidedInventory{
 
 	@Override
 	public void openInventory() {
-		
+
 	}
 
 	@Override
-	public void closeInventory() {		
+	public void closeInventory() {
 	}
 }
