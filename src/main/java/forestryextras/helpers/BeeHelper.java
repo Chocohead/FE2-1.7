@@ -3,8 +3,9 @@ package forestryextras.helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import forestry.api.apiculture.IBeeRoot;
+import forestry.api.genetics.AlleleManager;
 import forestry.core.config.ForestryItem;
-import forestry.plugins.PluginApiculture;
 
 public class BeeHelper {	
 	public static ItemStack getComb(ItemStack bee){
@@ -21,7 +22,9 @@ public class BeeHelper {
 	}
 	
 	public static ItemStack[] getProducts(ItemStack bee){
-		return PluginApiculture.beeInterface.getMember(bee).getProduceList();
+		IBeeRoot beeRoot = (IBeeRoot)AlleleManager.alleleRegistry.getSpeciesRoot("rootBees");
+		return beeRoot.getMember(bee).getProduceList();
+		//return PluginApiculture.beeInterface.getMember(bee).getProduceList();
 	}
 	
 	public static boolean hasFullSuit(EntityPlayer player){
