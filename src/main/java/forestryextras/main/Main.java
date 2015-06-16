@@ -19,14 +19,14 @@ import forestryextras.main.init.FEItems;
 import forestryextras.main.init.Recipes;
 import forestryextras.main.init.intergration.IntergrationLoader;
 
-@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "3.2", guiFactory = "forestryextras.main.ConfigGuiFactory", dependencies = "required-after:Forestry;required-after:WaslieCore;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
+@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "@VERSION@", guiFactory = "forestryextras.main.ConfigGuiFactory", dependencies = "required-after:Forestry;required-after:WaslieCore;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
 public class Main {
     @SidedProxy(clientSide = "forestryextras.client.ClientProxy", serverSide = "forestryextras.main.CommonProxy")
     public static CommonProxy proxy;
  
     @Instance("ForestryExtras")
     public static Main instance;
-    public static double version = 3.2;
+    public static double version = 3.3; 
     public static String modName = "ForestryExtras";
     public static String alias = "FE";
     public static IntergrationLoader integration = new IntergrationLoader();
@@ -56,8 +56,8 @@ public class Main {
     }
     
     public void initEvents(FMLInitializationEvent event){
-        MinecraftForge.EVENT_BUS.register(this); 
-        MinecraftForge.EVENT_BUS.register(new OnPlayerJoinWorld());
+        MinecraftForge.EVENT_BUS.register(this);  // WHY??????
+        //MinecraftForge.EVENT_BUS.register(new OnPlayerJoinWorld()); // Disabled version update check since this is not an official release
     }
     
     public void initTiles(){
