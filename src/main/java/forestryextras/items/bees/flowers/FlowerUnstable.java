@@ -1,9 +1,12 @@
 package forestryextras.items.bees.flowers;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IIndividual;
 
 public class FlowerUnstable extends FlowerProvider{
@@ -18,8 +21,9 @@ public class FlowerUnstable extends FlowerProvider{
 		return Block.getBlockFromItem(OreDictionary.getOres("blockUnstable").get(0).getItem()) == block;
 	}
 	
-//	@Override
-//	public ItemStack[] getItemStacks(){
-//		return null;
-//	}
+	@Override
+	public List<IFlower> getFlowers()
+	{
+		return null;
+	}
 }

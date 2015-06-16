@@ -83,11 +83,6 @@ public class FlowerProvider implements IFlowerProvider, IAlleleFlowers{
 		return products;
 	}
 
-//	@Override
-//	public ItemStack[] getItemStacks() {
-//		return null;
-//	}
-
 	@Override
 	public List<IFlower> getFlowers() {
 		// TODO Is this right???
