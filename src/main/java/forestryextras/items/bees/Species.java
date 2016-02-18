@@ -88,13 +88,21 @@ public class Species implements IAlleleBeeSpecies, IIconProvider{
     }
 
     @Override
-    public Map<ItemStack, Integer> getProducts() {
-        return products;
+    public Map<ItemStack, Float> getProductChances() {
+    	Map<ItemStack, Float> out = new HashMap<ItemStack, Float>(this.products.size());
+		for (ItemStack item : products.keySet()) {
+			out.put(item, ((float)products.get(item) / 100));
+		}
+		return out;
     }
     
     @Override
-    public Map<ItemStack, Integer> getSpecialty() {
-        return specialties;
+    public Map<ItemStack, Float> getSpecialtyChances() {
+    	Map<ItemStack, Float> out = new HashMap<ItemStack, Float>(this.specialties.size());
+		for (ItemStack item : specialties.keySet()) {
+			out.put(item, ((float)specialties.get(item) / 100));
+		}
+		return out;
     }
 
     @Override

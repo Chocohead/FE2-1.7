@@ -1,6 +1,8 @@
 package forestryextras.items;
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
@@ -14,7 +16,7 @@ import forestry.api.recipes.RecipeManagers;
 import forestryextras.main.Main;
 import forestryextras.main.init.Tabs;
 
-public class FEItemComb extends Item{
+public class FEItemComb extends Item {
 	public FEItemComb(String name, Color primaryColor, Color secondaryColor, ItemStack[] output, int[] chance){
 		setUnlocalizedName(Main.alias.toLowerCase() + "." + "comb" + "." + name.toLowerCase());
 		setCreativeTab(Tabs.tabMain);
@@ -26,7 +28,11 @@ public class FEItemComb extends Item{
 		OreDictionary.registerOre("beeComb", this);
 		
 		if (output != null && chance != null) {
-			RecipeManagers.centrifugeManager.addRecipe(10, new ItemStack(this, 1, 0), output, chance);
+			Map<ItemStack, Float> out = new HashMap<ItemStack, Float>(output.length);
+			for (int i = 0; i < output.length; i++) {
+				out.put(output[i], ((float)chance[i])/100);
+			}
+			RecipeManagers.centrifugeManager.addRecipe(10, new ItemStack(this, 1, 0), out);
 		}
 	}
 	public Color primaryColor;

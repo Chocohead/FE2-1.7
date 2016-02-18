@@ -11,9 +11,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IBeeMutation;
 import forestry.api.apiculture.IBeeRoot;
 import forestry.api.genetics.IAllele;
+import forestry.api.genetics.IAlleleSpecies;
 import forestry.api.genetics.IGenome;
 import forestryextras.main.init.FEBees;
 
@@ -41,10 +43,12 @@ public class BeeMutation implements IBeeMutation{
 	private String requiredBlockName;
 	
 	@Override
-	public float getChance(IBeeHousing housing, IAllele allele0, IAllele allele1, IGenome genome0, IGenome genome1) {
-		World world = housing.getWorld();
-
-		int processedChance = Math.round(this.baseChance * housing.getMutationModifier((IBeeGenome) genome0, (IBeeGenome) genome1, 1.0F) * getRoot().getBeekeepingMode(world).getMutationModifier((IBeeGenome) genome0, (IBeeGenome) genome1, 1.0F));
+	public float getChance(IBeeHousing housing, IAlleleBeeSpecies allele0, IAlleleBeeSpecies allele1, IBeeGenome genome0, IBeeGenome genome1) {
+		float chance = 1.0F;
+		for (IBeeModifier beemod : housing.getBeeModifiers()) {
+			beemod.getMutationModifier(genome0, genome1, chance);
+		}
+		int processedChance = Math.round(this.baseChance * chance * getRoot().getBeekeepingMode(housing.getWorld()).getBeeModifier().getMutationModifier((IBeeGenome) genome0, (IBeeGenome) genome1, 1.0F));
 
 		if(processedChance <= 0.0F) {
 			return 0.0F;
@@ -55,16 +59,6 @@ public class BeeMutation implements IBeeMutation{
 			return processedChance;
 		}
 		return 0.0F;
-	}
-	
-	@Override
-	public IAllele getAllele0(){
-		return parent1;
-	}
-
-	@Override
-	public IAllele getAllele1(){
-		return parent2;
 	}
 
 	@Override
@@ -159,5 +153,15 @@ public class BeeMutation implements IBeeMutation{
 			}
 		}
 		return conditions;
+	}
+
+	@Override
+	public IAlleleSpecies getAllele0() {
+		return (IAlleleSpecies) this.parent1;
+	}
+
+	@Override
+	public IAlleleSpecies getAllele1() {
+		return (IAlleleSpecies) this.parent2;
 	}
 }

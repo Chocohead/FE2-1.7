@@ -20,10 +20,4 @@ public class FlowerBotaniaAdvanced extends FlowerProvider{
 	public boolean isAcceptedFlower(World world, IIndividual individual, int x, int y, int z, Block block){
 		return block instanceof BlockSpecialFlower;
 	}
-	
-	@Override
-	public List<IFlower> getFlowers()
-	{
-		return null;
-	}
 }

@@ -7,7 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.storage.IBackpackDefinition;
-import forestry.core.config.ForestryItem;
+//import forestry.core.config.ForestryItem;
+import forestry.plugins.PluginApiculture;
 
 public class BackpackDefinition implements IBackpackDefinition{
 
@@ -27,9 +28,9 @@ public class BackpackDefinition implements IBackpackDefinition{
 	public void checkForContent()
 	{
 		if(this.name == "Frame Backpack"){
-			cont.add(new ItemStack(ForestryItem.frameImpregnated.item()));
-			cont.add(new ItemStack(ForestryItem.frameProven.item()));
-			cont.add(new ItemStack(ForestryItem.frameUntreated.item()));
+			cont.add(new ItemStack(PluginApiculture.items.frameImpregnated));
+			cont.add(new ItemStack(PluginApiculture.items.frameProven));
+			cont.add(new ItemStack(PluginApiculture.items.frameUntreated));
 			
 			for(ItemStack stack : OreDictionary.getOres("frameForestry"))
 				cont.add(stack);
@@ -39,11 +40,6 @@ public class BackpackDefinition implements IBackpackDefinition{
 	@Override
 	public String getKey() {
 		return this.key;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
 	}
 
 	@Override
@@ -68,11 +64,6 @@ public class BackpackDefinition implements IBackpackDefinition{
 			if(!cont.contains(is))
 				cont.add(is);
 		}
-	}
-
-	@Override
-	public boolean isValidItem(EntityPlayer player, ItemStack itemstack) {
-		return isValidItem(itemstack);
 	}
 
 	@Override

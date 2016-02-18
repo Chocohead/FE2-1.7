@@ -12,7 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import wasliecore.helpers.MathHelper;
 import wasliecore.helpers.Utils;
-import forestry.core.config.ForestryItem;
+import forestry.plugins.PluginApiculture;
+//import forestry.core.config.ForestryItem;
 import forestryextras.helpers.BeeHelper;
 import forestryextras.main.Config;
 
@@ -42,7 +43,7 @@ public class TileProducer extends TileEntity implements ISidedInventory {
 					ItemStack stack = getStackInSlot(0);
 					if (stack != null && BeeHelper.getComb(stack) != null) {
 						// ItemStack comb = BeeHelper.getComb(stack);
-						ItemStack comb = new ItemStack(ForestryItem.beeComb.item());
+						ItemStack comb = new ItemStack(PluginApiculture.items.beeComb);
 						Utils.dropBlock(worldObj, xCoord, yCoord, zCoord, comb);
 
 						this.turns--;

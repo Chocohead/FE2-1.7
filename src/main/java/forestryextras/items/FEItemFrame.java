@@ -20,13 +20,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IHiveFrame;
 import forestry.api.recipes.RecipeManagers;
 import forestryextras.main.Main;
 import forestryextras.main.init.FEItems;
 import forestryextras.main.init.Tabs;
 
-public final class FEItemFrame extends Item implements IHiveFrame {
+public final class FEItemFrame extends Item implements IHiveFrame, IBeeModifier {
 
     public FEItemFrame(int durability, boolean isHelish, boolean isSimulated, boolean isSelfLighted, boolean isSealed,
     		float frameDecay, float floweringMod, float productionMod, float lifespanMod,
@@ -223,5 +224,10 @@ public final class FEItemFrame extends Item implements IHiveFrame {
 		}else{
 			list.add(EnumChatFormatting.GREEN + "Press " + "Shift " + "for more info!");
 		}
+	}
+
+	@Override
+	public IBeeModifier getBeeModifier() {
+		return this;
 	}
 }

@@ -5,7 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import forestry.api.apiculture.IBeeRoot;
 import forestry.api.genetics.AlleleManager;
-import forestry.core.config.ForestryItem;
+//import forestry.core.config.ForestryItem;
+import forestry.plugins.PluginApiculture;
 
 public class BeeHelper {	
 	public static ItemStack getComb(ItemStack bee){
@@ -38,7 +39,7 @@ public class BeeHelper {
 			Item chestplate = chestplateStack.getItem();
 			Item legs = legsStack.getItem();
 			Item boots = bootsStack.getItem();
-			return (helmet == ForestryItem.apiaristHat.item()) && (chestplate == ForestryItem.apiaristChest.item()) && (legs == ForestryItem.apiaristLegs.item()) && (boots == ForestryItem.apiaristBoots.item());
+			return (helmet == PluginApiculture.items.apiaristHat) && (chestplate == PluginApiculture.items.apiaristChest) && (legs == PluginApiculture.items.apiaristLegs) && (boots == PluginApiculture.items.apiaristBoots);
 		}
 		return false;
 	}

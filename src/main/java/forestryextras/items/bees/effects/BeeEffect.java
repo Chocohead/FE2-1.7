@@ -52,13 +52,13 @@ public class BeeEffect implements IAlleleBeeEffect{
 	@Override
 	public IEffectData doEffect(IBeeGenome genome, IEffectData storedData,
 			IBeeHousing housing){
-		return doEffect(genome, storedData, housing, housing.getWorld(), housing.getXCoord(), housing.getYCoord(), housing.getZCoord());
+		return doEffect(genome, storedData, housing, housing.getWorld(), housing.getCoordinates().posX, housing.getCoordinates().posY, housing.getCoordinates().posZ);
 	}
 
 	@Override
 	public IEffectData doFX(IBeeGenome genome, IEffectData storedData,
 			IBeeHousing housing){
-		return doFX(genome, storedData, housing, housing.getWorld(), housing.getXCoord(), housing.getYCoord(), housing.getZCoord());
+		return doFX(genome, storedData, housing, housing.getWorld(), housing.getCoordinates().posX, housing.getCoordinates().posY, housing.getCoordinates().posZ);
 	}
 
 	public IEffectData doEffect(IBeeGenome genome, IEffectData storedData,

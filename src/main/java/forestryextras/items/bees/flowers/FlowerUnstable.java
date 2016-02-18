@@ -20,10 +20,4 @@ public class FlowerUnstable extends FlowerProvider{
 	public boolean isAcceptedFlower(World world, IIndividual individual, int x, int y, int z, Block block){
 		return Block.getBlockFromItem(OreDictionary.getOres("blockUnstable").get(0).getItem()) == block;
 	}
-	
-	@Override
-	public List<IFlower> getFlowers()
-	{
-		return null;
-	}
 }

@@ -1,6 +1,7 @@
 package forestryextras.items.bees.flowers;
 
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -47,14 +48,14 @@ public class FlowerProvider implements IFlowerProvider, IAlleleFlowers{
 		return this;
 	}
 
-	@Override
+	/*@Override
 	public boolean isAcceptedFlower(World world, IIndividual individual, int x, int y, int z){
 		Block block = world.getBlock(x, y, z);
 		if(block == null)
 			return false;
 		
 		return isAcceptedFlower(world, individual, x, y, z, block);
-	}
+	}*/
 	
 	public boolean isAcceptedFlower(World world, IIndividual individual, int x, int y, int z, Block block){
 		return false;
@@ -84,8 +85,12 @@ public class FlowerProvider implements IFlowerProvider, IAlleleFlowers{
 	}
 
 	@Override
-	public List<IFlower> getFlowers() {
-		// TODO Is this right???
+	public Set<IFlower> getFlowers() {
 		return FlowerManager.flowerRegistry.getAcceptableFlowers(this.name);				
+	}
+
+	@Override
+	public String getFlowerType() {
+		return null;
 	}
 }
