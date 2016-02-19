@@ -11,6 +11,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import forestryextras.blocks.tiles.TileCropChecker;
+import forestryextras.blocks.tiles.TileProducer;
 import forestryextras.handlers.GuiHandler;
 import forestryextras.handlers.events.OnPlayerJoinWorld;
 import forestryextras.main.init.FEBees;
@@ -19,7 +21,7 @@ import forestryextras.main.init.FEItems;
 import forestryextras.main.init.Recipes;
 import forestryextras.main.init.intergration.IntergrationLoader;
 
-@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "@VERSION@", guiFactory = "forestryextras.main.ConfigGuiFactory", dependencies = "required-after:Forestry;required-after:WaslieCore;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
+@Mod(modid = "ForestryExtras", name = "ForestryExtras", version = "@VERSION@", guiFactory = "forestryextras.main.ConfigGuiFactory", dependencies = "required-after:Forestry;after:Thaumcraft;after:ExtraTiC;after:EnderIO;after:oodmod;after:BigReactors;after:ModularMachines")
 public class Main {
     @SidedProxy(clientSide = "forestryextras.client.ClientProxy", serverSide = "forestryextras.main.CommonProxy")
     public static CommonProxy proxy;
@@ -61,8 +63,8 @@ public class Main {
     }
     
     public void initTiles(){
-        GameRegistry.registerTileEntity(forestryextras.blocks.tiles.TileProducer.class, "fe_producer");
-        GameRegistry.registerTileEntity(forestryextras.blocks.tiles.TileCropChecker.class, "fe_cropChecker");
+        GameRegistry.registerTileEntity(TileProducer.class, "fe_producer");
+        GameRegistry.registerTileEntity(TileCropChecker.class, "fe_cropChecker");
     }
     
     @EventHandler

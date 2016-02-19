@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import wasliecore.helpers.UpdateHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +16,7 @@ public class OnPlayerJoinWorld {
 		if(!e.world.isRemote){
 			if(e.entity instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)e.entity;
-				if(player.getDisplayName() != null){
+				if(player.getDisplayName() != null){/*
 					if(UpdateHelper.getUpdate(Main.alias + "2") != null){
 						if(UpdateHelper.getVersion(Main.alias + "2") != null && UpdateHelper.getVersion(Main.alias + "2") > Main.version){
 							if(UpdateHelper.getText(Main.alias + "2") != null){
@@ -25,7 +24,7 @@ public class OnPlayerJoinWorld {
 								sendMessage(UpdateHelper.getText(Main.alias + "2"), player, EnumChatFormatting.GRAY);
 							}
 						}
-					}
+					}*/
 				}
 			}
 		}

@@ -3,15 +3,15 @@
   "modid": "ForestryExtras",
   "name": "Forestry Extras",
   "description": "Forestry Addon",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "@VERSION@",
+  "mcversion": "1.7.10",
   "url": "http://wasliebob.nl/FE.html",
   "updateUrl": "",
   "authors": ["Wasliebob"],
   "credits": "Creator: Wasliebob",
   "logoFile": "",
   "screenshots": [],
-  "requiredMods": ["Forge","Forestry","WaslieCore"],
+  "requiredMods": ["Forge","Forestry"],
   "dependencies": ["Thaumcraft","Botania","ExtraTiC","EnderIO","oodmod","BigReactors","ModularMachines"]
 }
 ]

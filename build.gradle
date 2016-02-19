@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2-3.3.40"
+version = "2-3.3.41"
 group= "ForestryExtras" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ForestryExtras2_"+minecraft.version
 
@@ -25,7 +25,6 @@ minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
 	replace "@VERSION@", project.version
-	replace "Suceeded", "Succeeded"
 }
 
 repositories {
@@ -40,13 +39,6 @@ dependencies {
     compile "codechicken:NotEnoughItems:1.7.10-1.0.4.83:dev"
     compile "codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev"
     compile fileTree(dir: 'lib', include: '*.jar')
-}
-
-jar {
-        manifest {
-        attributes 'FMLCorePlugin': 'chocohead.patcher.PatcherPlugin',
-                   'FMLCorePluginContainsFMLMod': 'true'
-    }
 }
 
 processResources

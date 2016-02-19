@@ -1,5 +1,6 @@
 package forestryextras.blocks.tiles;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -10,8 +11,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
-import wasliecore.helpers.MathHelper;
-import wasliecore.helpers.Utils;
 import forestry.plugins.PluginApiculture;
 //import forestry.core.config.ForestryItem;
 import forestryextras.helpers.BeeHelper;
@@ -21,7 +20,7 @@ public class TileProducer extends TileEntity implements ISidedInventory {
 
 	public TileProducer() {
 		stacks = new ItemStack[1];
-		time = MathHelper.secondToTick(Config.beeducerTime);
+		time = Config.beeducerTime * 20;
 		turns = Config.beeducerTurns;
 	}
 
@@ -43,11 +42,12 @@ public class TileProducer extends TileEntity implements ISidedInventory {
 					ItemStack stack = getStackInSlot(0);
 					if (stack != null && BeeHelper.getComb(stack) != null) {
 						// ItemStack comb = BeeHelper.getComb(stack);
-						ItemStack comb = new ItemStack(PluginApiculture.items.beeComb);
-						Utils.dropBlock(worldObj, xCoord, yCoord, zCoord, comb);
-
+						float f = 0.7F;
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord + worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D,
+																			 yCoord + worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D,
+																			 zCoord + worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D, new ItemStack(PluginApiculture.items.beeComb)));
 						this.turns--;
-						this.time = MathHelper.secondToTick(Config.beeducerTime);
+						this.time = Config.beeducerTime * 20;
 					}
 				}
 			}
@@ -156,7 +156,7 @@ public class TileProducer extends TileEntity implements ISidedInventory {
 				itemstack.stackSize = getInventoryStackLimit();
 			}
 			turns = Config.beeducerTurns;
-			time = MathHelper.secondToTick(Config.beeducerTime);
+			time = Config.beeducerTime * 20;
 		}
 	}
 
